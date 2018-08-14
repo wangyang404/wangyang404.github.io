@@ -5,15 +5,28 @@
   
 
   
-  <title>wangyang&#39;s blog</title>
+  <title>JVM总结 | wangyang&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="wangyang&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="jvm 总体梳理 jvm体系总体分四大块： 类的加载机制jvm内存结构GC算法 垃圾回收GC分析 命令调优 当然这些知识点在之前的文章中都有详细的介绍，这里只做主干的梳理 这里画了一个思维导图，将所有的知识点进行了陈列 类的加载机制 主要关注点： 什么是类的加载类的生命周期类加载器双亲委派模型 什么是类的加载 类的加载指的是将类的.class文件中的二进制数据读入到内存中，将其放在运行时数据区的方">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM总结">
+<meta property="og:url" content="http://yoursite.com/2018/06/10/JVM总结/index.html">
 <meta property="og:site_name" content="wangyang&#39;s blog">
+<meta property="og:description" content="jvm 总体梳理 jvm体系总体分四大块： 类的加载机制jvm内存结构GC算法 垃圾回收GC分析 命令调优 当然这些知识点在之前的文章中都有详细的介绍，这里只做主干的梳理 这里画了一个思维导图，将所有的知识点进行了陈列 类的加载机制 主要关注点： 什么是类的加载类的生命周期类加载器双亲委派模型 什么是类的加载 类的加载指的是将类的.class文件中的二进制数据读入到内存中，将其放在运行时数据区的方">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="c:/Users/Administrator/Desktop/11111111.jpg">
+<meta property="og:image" content="c:/Users/Administrator/Desktop/222222.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/06/10/JVM总结/‪C:/Users/Administrator/Desktop/33333.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/06/10/JVM总结/‪C:/Users/Administrator/Desktop/444444.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/06/10/JVM总结/‪‪C:/Users/Administrator/Desktop/55555555555555.jpg">
+<meta property="og:image" content="c:/Users/Administrator/Desktop/66666666666.jpg">
+<meta property="og:image" content="c:/Users/Administrator/Desktop/77777777.jpg">
+<meta property="og:image" content="c:/Users/Administrator/Desktop/8888888888888.jpg">
+<meta property="og:updated_time" content="2018-08-14T10:13:43.583Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="wangyang&#39;s blog">
+<meta name="twitter:title" content="JVM总结">
+<meta name="twitter:description" content="jvm 总体梳理 jvm体系总体分四大块： 类的加载机制jvm内存结构GC算法 垃圾回收GC分析 命令调优 当然这些知识点在之前的文章中都有详细的介绍，这里只做主干的梳理 这里画了一个思维导图，将所有的知识点进行了陈列 类的加载机制 主要关注点： 什么是类的加载类的生命周期类加载器双亲委派模型 什么是类的加载 类的加载指的是将类的.class文件中的二进制数据读入到内存中，将其放在运行时数据区的方">
+<meta name="twitter:image" content="c:/Users/Administrator/Desktop/11111111.jpg">
   
     <link rel="alternate" href="/atom.xml" title="wangyang&#39;s blog" type="application/atom+xml">
   
@@ -60,57 +73,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-spring.datasource.url与spring.datasource.jdbc-url - 副本" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/08/14/spring.datasource.url与spring.datasource.jdbc-url - 副本/" class="article-date">
-  <time datetime="2018-08-14T03:01:44.000Z" itemprop="datePublished">2018-08-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/14/spring.datasource.url与spring.datasource.jdbc-url - 副本/">spring.datasource.url与spring.datasource.jdbc-url</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天使用spring boot配置数据源，出现了问题。</p>
-<p>使用数据源配置</p>
-<p>spring.datasource.url=jdbc:mysql://localhost/test<br>spring.datasource.username=xxxx<br>spring.datasource.password=xxxx<br>spring.datasource.driverClassName=com.mysql.jdbc.Driver</p>
-<p>提示我：jdbcUrl is required with driverClassName。</p>
-<p>我明明写出了driverClassName为什么还提示我需要写出driverClassName。</p>
-<p>上网搜了一下，结果是使用spring.datasource.url的锅。</p>
-<p>spring.datasource.url 数据库的 JDBC URL。</p>
-<p>spring.datasource.jdbc-url 用来创建连接的 JDBC URL。</p>
-<p>官方文档的解释是：</p>
-<p>因为连接池的实际类型没有被公开，所以在您的自定义数据源的元数据中没有生成密钥，而且在IDE中没有完成(因为DataSource接口没有暴露属性)。另外，如果您碰巧在类路径上有Hikari，那么这个基本设置就不起作用了，因为Hikari没有url属性(但是确实有一个jdbcUrl属性)。在这种情况下，您必须重写您的配置如下:</p>
-<p>spring.datasource.jdbc-url=jdbc:mysql://localhost/test<br>spring.datasource.username=xxxx<br>spring.datasource.password=xxxx</p>
-<p>而且我试了一下driverClassName跟本是没有起到做用。 </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/08/14/spring.datasource.url与spring.datasource.jdbc-url - 副本/" data-id="cjktjtjbn0000s0ug0xzy23wc" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-JVM总结" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-JVM总结" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/06/10/JVM总结/" class="article-date">
   <time datetime="2018-06-10T10:01:44.000Z" itemprop="datePublished">2018-06-10</time>
@@ -123,8 +86,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/10/JVM总结/">JVM总结</a>
+    <h1 class="article-title" itemprop="name">
+      JVM总结
     </h1>
   
 
@@ -195,11 +158,23 @@
     </footer>
   </div>
   
-</article>
-
+    
+<nav id="article-nav">
+  
+    <a href="/2018/08/14/spring.datasource.url与spring.datasource.jdbc-url - 副本/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          spring.datasource.url与spring.datasource.jdbc-url
+        
+      </div>
+    </a>
+  
+  
+</nav>
 
   
-
+</article>
 
 </section>
         

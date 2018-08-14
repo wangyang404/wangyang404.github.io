@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>spring.datasource.url与spring.datasource.jdbc-url | wangyang&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="今天使用spring boot配置数据源，出现了问题。 使用数据源配置 spring.datasource.url=jdbc:mysql://localhost/testspring.datasource.username=xxxxspring.datasource.password=xxxxspring.datasource.driverClassName=com.mysql.jdbc.Driv">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring.datasource.url与spring.datasource.jdbc-url">
+<meta property="og:url" content="http://yoursite.com/2018/08/14/spring.datasource.url与spring.datasource.jdbc-url - 副本/index.html">
+<meta property="og:site_name" content="wangyang&#39;s blog">
+<meta property="og:description" content="今天使用spring boot配置数据源，出现了问题。 使用数据源配置 spring.datasource.url=jdbc:mysql://localhost/testspring.datasource.username=xxxxspring.datasource.password=xxxxspring.datasource.driverClassName=com.mysql.jdbc.Driv">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-08-14T03:01:18.108Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="spring.datasource.url与spring.datasource.jdbc-url">
+<meta name="twitter:description" content="今天使用spring boot配置数据源，出现了问题。 使用数据源配置 spring.datasource.url=jdbc:mysql://localhost/testspring.datasource.username=xxxxspring.datasource.password=xxxxspring.datasource.driverClassName=com.mysql.jdbc.Driv">
+  
+    <link rel="alternate" href="/atom.xml" title="wangyang&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">wangyang&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-spring.datasource.url与spring.datasource.jdbc-url - 副本" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/08/14/spring.datasource.url与spring.datasource.jdbc-url - 副本/" class="article-date">
+  <time datetime="2018-08-14T03:01:44.000Z" itemprop="datePublished">2018-08-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      spring.datasource.url与spring.datasource.jdbc-url
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天使用spring boot配置数据源，出现了问题。</p>
+<p>使用数据源配置</p>
+<p>spring.datasource.url=jdbc:mysql://localhost/test<br>spring.datasource.username=xxxx<br>spring.datasource.password=xxxx<br>spring.datasource.driverClassName=com.mysql.jdbc.Driver</p>
+<p>提示我：jdbcUrl is required with driverClassName。</p>
+<p>我明明写出了driverClassName为什么还提示我需要写出driverClassName。</p>
+<p>上网搜了一下，结果是使用spring.datasource.url的锅。</p>
+<p>spring.datasource.url 数据库的 JDBC URL。</p>
+<p>spring.datasource.jdbc-url 用来创建连接的 JDBC URL。</p>
+<p>官方文档的解释是：</p>
+<p>因为连接池的实际类型没有被公开，所以在您的自定义数据源的元数据中没有生成密钥，而且在IDE中没有完成(因为DataSource接口没有暴露属性)。另外，如果您碰巧在类路径上有Hikari，那么这个基本设置就不起作用了，因为Hikari没有url属性(但是确实有一个jdbcUrl属性)。在这种情况下，您必须重写您的配置如下:</p>
+<p>spring.datasource.jdbc-url=jdbc:mysql://localhost/test<br>spring.datasource.username=xxxx<br>spring.datasource.password=xxxx</p>
+<p>而且我试了一下driverClassName跟本是没有起到做用。 </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/08/14/spring.datasource.url与spring.datasource.jdbc-url - 副本/" data-id="cjktjtjbn0000s0ug0xzy23wc" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/06/10/JVM总结/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JVM总结</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/08/14/spring.datasource.url与spring.datasource.jdbc-url - 副本/">spring.datasource.url与spring.datasource.jdbc-url</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/10/JVM总结/">JVM总结</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 wangyang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
