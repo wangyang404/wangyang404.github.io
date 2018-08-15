@@ -5,15 +5,19 @@
   
 
   
-  <title>wangyang&#39;s blog</title>
+  <title>finbug总结 | wangyang&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="wangyang&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="FindBugs是一个静态分析工具，在程序不需运行的情况下，分析class文件，将字节码与一组缺陷模式进行对比，试图寻找真正的缺陷或者潜在的性能问题。FindBugs共有156个缺陷检测器，分为11个类别。1.No Category（无类别）2.Bad Practice（坏习惯）3.Correctness（正确性）4.Dodgy Code（危险代码）5.Internationalization（">
+<meta property="og:type" content="article">
+<meta property="og:title" content="finbug总结">
+<meta property="og:url" content="http://yoursite.com/2018/08/15/findbug总结/index.html">
 <meta property="og:site_name" content="wangyang&#39;s blog">
+<meta property="og:description" content="FindBugs是一个静态分析工具，在程序不需运行的情况下，分析class文件，将字节码与一组缺陷模式进行对比，试图寻找真正的缺陷或者潜在的性能问题。FindBugs共有156个缺陷检测器，分为11个类别。1.No Category（无类别）2.Bad Practice（坏习惯）3.Correctness（正确性）4.Dodgy Code（危险代码）5.Internationalization（">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-08-15T08:44:26.427Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="wangyang&#39;s blog">
+<meta name="twitter:title" content="finbug总结">
+<meta name="twitter:description" content="FindBugs是一个静态分析工具，在程序不需运行的情况下，分析class文件，将字节码与一组缺陷模式进行对比，试图寻找真正的缺陷或者潜在的性能问题。FindBugs共有156个缺陷检测器，分为11个类别。1.No Category（无类别）2.Bad Practice（坏习惯）3.Correctness（正确性）4.Dodgy Code（危险代码）5.Internationalization（">
   
     <link rel="alternate" href="/atom.xml" title="wangyang&#39;s blog" type="application/atom+xml">
   
@@ -60,9 +64,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-findbug总结" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-findbug总结" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/08/15/findbug总结/" class="article-date">
   <time datetime="2018-08-15T08:01:44.000Z" itemprop="datePublished">2018-08-15</time>
@@ -75,8 +77,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/15/findbug总结/">finbug总结</a>
+    <h1 class="article-title" itemprop="name">
+      finbug总结
     </h1>
   
 
@@ -249,148 +251,19 @@ if (s1 ==null &amp;&amp; s2 == null) {
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-spring.datasource.url与spring.datasource.jdbc-url - 副本" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/08/14/spring.datasource.url与spring.datasource.jdbc-url - 副本/" class="article-date">
-  <time datetime="2018-08-14T03:01:44.000Z" itemprop="datePublished">2018-08-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/14/spring.datasource.url与spring.datasource.jdbc-url - 副本/">spring.datasource.url与spring.datasource.jdbc-url</a>
-    </h1>
+    <a href="/2018/08/14/spring.datasource.url与spring.datasource.jdbc-url - 副本/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">spring.datasource.url与spring.datasource.jdbc-url</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天使用spring boot配置数据源，出现了问题。</p>
-<p>使用数据源配置</p>
-<p>spring.datasource.url=jdbc:mysql://localhost/test<br>spring.datasource.username=xxxx<br>spring.datasource.password=xxxx<br>spring.datasource.driverClassName=com.mysql.jdbc.Driver</p>
-<p>提示我：jdbcUrl is required with driverClassName。</p>
-<p>我明明写出了driverClassName为什么还提示我需要写出driverClassName。</p>
-<p>上网搜了一下，结果是使用spring.datasource.url的锅。</p>
-<p>spring.datasource.url 数据库的 JDBC URL。</p>
-<p>spring.datasource.jdbc-url 用来创建连接的 JDBC URL。</p>
-<p>官方文档的解释是：</p>
-<p>因为连接池的实际类型没有被公开，所以在您的自定义数据源的元数据中没有生成密钥，而且在IDE中没有完成(因为DataSource接口没有暴露属性)。另外，如果您碰巧在类路径上有Hikari，那么这个基本设置就不起作用了，因为Hikari没有url属性(但是确实有一个jdbcUrl属性)。在这种情况下，您必须重写您的配置如下:</p>
-<p>spring.datasource.jdbc-url=jdbc:mysql://localhost/test<br>spring.datasource.username=xxxx<br>spring.datasource.password=xxxx</p>
-<p>而且我试了一下driverClassName跟本是没有起到做用。 </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/08/14/spring.datasource.url与spring.datasource.jdbc-url - 副本/" data-id="cjkugkrgz0000u4ugedkbpo0q" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-JVM总结" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/06/10/JVM总结/" class="article-date">
-  <time datetime="2018-06-10T10:01:44.000Z" itemprop="datePublished">2018-06-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/10/JVM总结/">JVM总结</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>jvm 总体梳理</p>
-<p>jvm体系总体分四大块：</p>
-<p>类的加载机制<br>jvm内存结构<br>GC算法 垃圾回收<br>GC分析 命令调优</p>
-<p>当然这些知识点在之前的文章中都有详细的介绍，这里只做主干的梳理</p>
-<p>这里画了一个思维导图，将所有的知识点进行了陈列<br>![avatar][/Users/Administrator/Desktop/11111111.jpg]</p>
-<p>类的加载机制</p>
-<p>主要关注点：</p>
-<p>什么是类的加载<br>类的生命周期<br>类加载器<br>双亲委派模型</p>
-<p>什么是类的加载</p>
-<p>类的加载指的是将类的.class文件中的二进制数据读入到内存中，将其放在运行时数据区的方法区内，然后在堆区创建一个java.lang.Class对象，用来封装类在方法区内的数据结构。类的加载的最终产品是位于堆区中的Class对象，Class对象封装了类在方法区内的数据结构，并且向Java程序员提供了访问方法区内的数据结构的接口。</p>
-<p>类的生命周期</p>
-<p>类的生命周期包括这几个部分，加载、连接、初始化、使用和卸载，其中前三部是类的加载的过程,如下图；<br><img src="C:\\Users\\Administrator\\Desktop\\222222.jpg" alt="avatar"></p>
-<p>加载，查找并加载类的二进制数据，在Java堆中也创建一个java.lang.Class类的对象<br>连接，连接又包含三块内容：验证、准备、初始化。1）验证，文件格式、元数据、字节码、符号引用验证；2）准备，为类的静态变量分配内存，并将其初始化为默认值；3）解析，把类中的符号引用转换为直接引用<br>初始化，为类的静态变量赋予正确的初始值<br>使用，new出对象程序中使用<br>卸载，执行垃圾回收</p>
-<p><img src="‪C:\Users\Administrator\Desktop\33333.jpg" alt="avatar"></p>
-<p>启动类加载器：Bootstrap ClassLoader，负责加载存放在JDK\jre\lib(JDK代表JDK的安装目录，下同)下，或被-Xbootclasspath参数指定的路径中的，并且能被虚拟机识别的类库<br>扩展类加载器：Extension ClassLoader，该加载器由sun.misc.Launcher$ExtClassLoader实现，它负责加载DK\jre\lib\ext目录中，或者由java.ext.dirs系统变量指定的路径中的所有类库（如javax.*开头的类），开发者可以直接使用扩展类加载器。<br>应用程序类加载器：Application ClassLoader，该类加载器由sun.misc.Launcher$AppClassLoader来实现，它负责加载用户类路径（ClassPath）所指定的类，开发者可以直接使用该类加载器<br>类加载机制</p>
-<p>全盘负责，当一个类加载器负责加载某个Class时，该Class所依赖的和引用的其他Class也将由该类加载器负责载入，除非显示使用另外一个类加载器来载入<br>父类委托，先让父类加载器试图加载该类，只有在父类加载器无法加载该类时才尝试从自己的类路径中加载该类<br>缓存机制，缓存机制将会保证所有加载过的Class都会被缓存，当程序中需要使用某个Class时，类加载器先从缓存区寻找该Class，只有缓存区不存在，系统才会读取该类对应的二进制数据，并将其转换成Class对象，存入缓存区。这就是为什么修改了Class后，必须重启JVM，程序的修改才会生效<br>jvm内存结构</p>
-<p>主要关注点：</p>
-<p>jvm内存结构都是什么<br>对象分配规则</p>
-<p>jvm内存结构</p>
-<p><img src="‪C:\Users\Administrator\Desktop\444444.jpg" alt="avatar"></p>
-<p>方法区和堆是所有线程共享的内存区域；而java栈、本地方法栈和程序计数器是运行是线程私有的内存区域。<br>Java堆（Heap）,是Java虚拟机所管理的内存中最大的一块。Java堆是被所有线程共享的一块内存区域，在虚拟机启动时创建。此内存区域的唯一目的就是存放对象实例，几乎所有的对象实例都在这里分配内存。<br>方法区（Method Area）,方法区（Method Area）与Java堆一样，是各个线程共享的内存区域，它用于存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。<br>程序计数器（Program Counter Register）,程序计数器（Program Counter Register）是一块较小的内存空间，它的作用可以看做是当前线程所执行的字节码的行号指示器。<br>JVM栈（JVM Stacks）,与程序计数器一样，Java虚拟机栈（Java Virtual Machine Stacks）也是线程私有的，它的生命周期与线程相同。虚拟机栈描述的是Java方法执行的内存模型：每个方法被执行的时候都会同时创建一个栈帧（Stack Frame）用于存储局部变量表、操作栈、动态链接、方法出口等信息。每一个方法被调用直至执行完成的过程，就对应着一个栈帧在虚拟机栈中从入栈到出栈的过程。<br>本地方法栈（Native Method Stacks）,本地方法栈（Native Method Stacks）与虚拟机栈所发挥的作用是非常相似的，其区别不过是虚拟机栈为虚拟机执行Java方法（也就是字节码）服务，而本地方法栈则是为虚拟机使用到的Native方法服务。</p>
-<p>对象分配规则</p>
-<p>对象优先分配在Eden区，如果Eden区没有足够的空间时，虚拟机执行一次Minor GC。<br>大对象直接进入老年代（大对象是指需要大量连续内存空间的对象）。这样做的目的是避免在Eden区和两个Survivor区之间发生大量的内存拷贝（新生代采用复制算法收集内存）。<br>长期存活的对象进入老年代。虚拟机为每个对象定义了一个年龄计数器，如果对象经过了1次Minor GC那么对象会进入Survivor区，之后每经过一次Minor GC那么对象的年龄加1，知道达到阀值对象进入老年区。<br>动态判断对象的年龄。如果Survivor区中相同年龄的所有对象大小的总和大于Survivor空间的一半，年龄大于或等于该年龄的对象可以直接进入老年代。<br>空间分配担保。每次进行Minor GC时，JVM会计算Survivor区移至老年区的对象的平均大小，如果这个值大于老年区的剩余值大小则进行一次Full GC，如果小于检查HandlePromotionFailure设置，如果true则只进行Monitor GC,如果false则进行Full GC。<br>如何通过参数来控制个各个内存区域<br>参考此文章：jvm系列(二):JVM内存结构<br>GC算法 垃圾回收</p>
-<p>主要关注点：</p>
-<p>对象存活判断<br>GC算法<br>垃圾回收器</p>
-<p>对象存活判断</p>
-<p>判断对象是否存活一般有两种方式：</p>
-<p>引用计数：每个对象有一个引用计数属性，新增一个引用时计数加1，引用释放时计数减1，计数为0时可以回收。此方法简单，无法解决对象相互循环引用的问题。<br>可达性分析（Reachability Analysis）：从GC Roots开始向下搜索，搜索所走过的路径称为引用链。当一个对象到GC Roots没有任何引用链相连时，则证明此对象是不可用的，不可达对象。</p>
-<p>GC算法</p>
-<p>GC最基础的算法有三种：标记 -清除算法、复制算法、标记-压缩算法，我们常用的垃圾回收器一般都采用分代收集算法。</p>
-<p>标记 -清除算法，“标记-清除”（Mark-Sweep）算法，如它的名字一样，算法分为“标记”和“清除”两个阶段：首先标记出所有需要回收的对象，在标记完成后统一回收掉所有被标记的对象。<br>复制算法，“复制”（Copying）的收集算法，它将可用内存按容量划分为大小相等的两块，每次只使用其中的一块。当这一块的内存用完了，就将还存活着的对象复制到另外一块上面，然后再把已使用过的内存空间一次清理掉。<br>标记-压缩算法，标记过程仍然与“标记-清除”算法一样，但后续步骤不是直接对可回收对象进行清理，而是让所有存活的对象都向一端移动，然后直接清理掉端边界以外的内存<br>分代收集算法，“分代收集”（Generational Collection）算法，把Java堆分为新生代和老年代，这样就可以根据各个年代的特点采用最适当的收集算法。</p>
-<p>垃圾回收器</p>
-<p>Serial收集器，串行收集器是最古老，最稳定以及效率高的收集器，可能会产生较长的停顿，只使用一个线程去回收。<br>ParNew收集器，ParNew收集器其实就是Serial收集器的多线程版本。<br>Parallel收集器，Parallel Scavenge收集器类似ParNew收集器，Parallel收集器更关注系统的吞吐量。<br>Parallel Old 收集器，Parallel Old是Parallel Scavenge收集器的老年代版本，使用多线程和“标记－整理”算法<br>CMS收集器，CMS（Concurrent Mark Sweep）收集器是一种以获取最短回收停顿时间为目标的收集器。<br>G1收集器，G1 (Garbage-First)是一款面向服务器的垃圾收集器,主要针对配备多颗处理器及大容量内存的机器. 以极高概率满足GC停顿时间要求的同时,还具备高吞吐量性能特征<br>GC算法和垃圾回收器算法图解以及更详细内容参考： jvm系列(三):GC算法 垃圾收集器<br>GC分析 命令调优</p>
-<p>主要关注点：</p>
-<p>GC日志分析<br>调优命令<br>调优工具</p>
-<p>GC日志分析</p>
-<p>摘录GC日志一部分</p>
-<p>Young GC回收日志:</p>
-<p><img src="‪‪C:\Users\Administrator\Desktop\55555555555555.jpg" alt="avatar"></p>
-<p>Full GC回收日志:</p>
-<p><img src="C:\Users\Administrator\Desktop\66666666666.jpg" alt="avatar"></p>
-<p>通过上面日志分析得出，PSYoungGen、ParOldGen、PSPermGen属于Parallel收集器。其中PSYoungGen表示gc回收前后年轻代的内</p>
-<p>通过上面日志分析得出，PSYoungGen、ParOldGen、PSPermGen属于Parallel收集器。其中PSYoungGen表示gc回收前后年轻代的内存变化；ParOldGen表示gc回收前后老年代的内存变化；PSPermGen表示gc回收前后永久区的内存变化。young gc 主要是针对年轻代进行内存回收比较频繁，耗时短；full gc 会对整个堆内存进行回城，耗时长，因此一般尽量减少full gc的次数</p>
-<p>Young GC日志:</p>
-<p><img src="C:\Users\Administrator\Desktop\77777777.jpg" alt="avatar"></p>
-<p>Full GC日志:</p>
-<p><img src="C:\Users\Administrator\Desktop\8888888888888.jpg" alt="avatar"></p>
-<p>调优命令</p>
-<p>Sun JDK监控和故障处理命令有jps jstat jmap jhat jstack jinfo</p>
-<p>jps，JVM Process Status Tool,显示指定系统内所有的HotSpot虚拟机进程。<br>jstat，JVM statistics Monitoring是用于监视虚拟机运行时状态信息的命令，它可以显示出虚拟机进程中的类装载、内存、垃圾收集、JIT编译等运行数据。<br>jmap，JVM Memory Map命令用于生成heap dump文件<br>jhat，JVM Heap Analysis Tool命令是与jmap搭配使用，用来分析jmap生成的dump，jhat内置了一个微型的HTTP/HTML服务器，生成dump的分析结果后，可以在浏览器中查看<br>jstack，用于生成java虚拟机当前时刻的线程快照。<br>jinfo，JVM Configuration info 这个命令作用是实时查看和调整虚拟机运行参数。</p>
-<p>调优工具</p>
-<p>常用调优工具分为两类,jdk自带监控工具：jconsole和jvisualvm，第三方有：MAT(Memory Analyzer Tool)、GChisto。</p>
-<p>jconsole，Java Monitoring and Management Console是从java5开始，在JDK中自带的java监控和管理控制台，用于对JVM中内存，线程和类等的监控<br>jvisualvm，jdk自带全能工具，可以分析内存快照、线程快照；监控内存变化、GC变化等。<br>MAT，Memory Analyzer Tool，一个基于Eclipse的内存分析工具，是一个快速、功能丰富的Java heap分析工具，它可以帮助我们查找内存泄漏和减少内存消耗<br>GChisto，一款专业分析gc日志的工具</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/10/JVM总结/" data-id="cjkugkrhc0001u4ugwwf3kbli" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
 
 </section>
         
